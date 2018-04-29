@@ -807,11 +807,11 @@ import UIKit
         // Grab an unused label and update it to the right position for the newly activated poitns
         for point in activatedPoints {
             let label = labelPool.activateLabel(forPointIndex: point)
-            
             label.text = (dataSource?.label(atIndex: point) ?? "")
             label.textColor = ref.dataPointLabelColor
             label.font = ref.dataPointLabelFont
-            
+            label.numberOfLines = 0
+            label.textAlignment = .center
             label.sizeToFit()
             
             // self.range.min is the current ranges minimum that has been detected
@@ -819,7 +819,7 @@ import UIKit
             let rangeMin = (shouldAdaptRange) ? self.range.min : self.rangeMin
             let position = calculatePosition(atIndex: point, value: rangeMin)
             
-            label.frame = CGRect(origin: CGPoint(x: position.x - label.frame.width / 2, y: position.y + ref.dataPointLabelTopMargin), size: label.frame.size)
+            label.frame = CGRect(origin: CGPoint(x: position.x - label.frame.width / 2, y: position.y + ref.dataPointLabelTopMargin), size: CGSize(width: 40, height: 30))
             
             let _ = labelsView.subviews.filter { $0.frame == label.frame }.map { $0.removeFromSuperview() }
             
